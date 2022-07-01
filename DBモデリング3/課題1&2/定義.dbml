@@ -1,0 +1,72 @@
+/*
+【前提】
+・ルートディレクトリは予め登録されている
+・ディレクトリとドキュメントは復元可能
+・ディレクトリの移動はdeleteとinsertで実現する
+*/
+
+/*
+【課題】
+・閉包テーブルにdepthを持たせたため更新の時に面倒そう
+*/
+
+
+Table content {
+  content_id int [pk, increment]
+  created_at datetime
+  create_user varchar [ref: < user.user_id]
+  type int [note: "ドキュメント・ディレクトリなどを示す"]
+  order int [note: "親ディレクトリ内での順番"]
+  Note: '''
+  ドキュメントやディレクトリなど、システム内で扱うコンテンツを全て記録する。
+  コンテンツの種類ごとにtypeを追加し、typeごとにテーブルを用意する(クラステーブル継承)。
+  '''
+}
+
+Table deleted_content {
+  content_id int [pk, ref: - content.content_id]
+  deleted_at datetime
+  delete_user varchar [ref: < user.user_id]
+}
+
+Table content_closure {
+  ancestor_id int [pk, ref: > content.content_id]
+  descendant_id int [pk, ref: > content.content_id]
+  depth int [note: "ancestorに対するdescendantの深さを示す。"]
+  order int [note: "直近のancestor(depthが1)の場合、descendantの順番を示す"]
+  Note: '''
+  contentテーブルの閉包テーブル。
+  コンテンツ間の親子関係を管理する。
+  '''
+}
+
+Table document {
+  document_id int [pk, ref: - content.content_id]
+}
+
+Table document_title {
+  document_id int [ref: > document.document_id]
+  title_id int [note: "document_id内で連番"]
+  updated_at datetime [note: "最新日時が現在のタイトル"]
+  update_user varchar [ref: < user.user_id ]
+  title varchar
+}
+
+Table document_text {
+  document_id int [ref: > document.document_id]
+  content_id int [note: "document_id内で連番"]
+  updated_at datetime [note: "最新日時が現在の内容"]
+  update_user varchar [ref: < user.user_id ]
+  content varchar
+}
+
+Table directory {
+  directory_id int [pk, ref: - content.content_id, note:"ルートディレクトリは0で予め定義"]
+  title varchar [note:"ディレクトリのタイトルは履歴を保持しない"]
+}
+
+Table user {
+  user_id int [pk, increment]
+  name varchar
+}
+
