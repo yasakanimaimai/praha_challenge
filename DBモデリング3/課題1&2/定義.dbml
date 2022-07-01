@@ -1,14 +1,14 @@
 /*
 【前提】
-・ルートディレクトリは予め登録されている
+・ルートディレクトリは予め登録されていること
 ・ディレクトリとドキュメントは復元可能
-・ディレクトリの移動はdeleteとinsertで実現する
+・ディレクトリの移動はdeleteとinsertで実現すること
 */
 
 /*
 【課題】
-・閉包テーブルにdepthを持たせたため更新の時に面倒そう
-・ユーザのドキュメントに関する権限などは考慮していない
+・閉包テーブルに親に対する子の深さを持たせたため、階層を更新した際に面倒そう
+・ユーザのドキュメントに関する権限などは考慮できていない
 */
 
 
@@ -28,13 +28,15 @@ Table deleted_content {
   content_id int [pk, ref: - content.content_id]
   deleted_at datetime
   delete_user varchar [ref: < user.user_id]
+  Note: '''
+  削除コンテンツを管理する。contentからは物理削除しない。
+  '''
 }
 
 Table content_closure {
   ancestor_id int [pk, ref: > content.content_id]
   descendant_id int [pk, ref: > content.content_id]
-  depth int [note: "ancestorに対するdescendantの深さを示す。"]
-  order int [note: "直近のancestor(depthが1)の場合、descendantの順番を示す"]
+  depth int [note: "ancestorに対するdescendantの深さを示す。直近の子を取得しやすくなるはず"]
   Note: '''
   contentテーブルの閉包テーブル。
   コンテンツ間の親子関係を管理する。
@@ -43,6 +45,10 @@ Table content_closure {
 
 Table document {
   document_id int [pk, ref: - content.content_id]
+  Note: '''
+  ドキュメントタイプのコンテンツを管理する。
+  タイトルとテキストの最新のidを追加してもいいかもしれない。
+  '''
 }
 
 Table document_title {
@@ -51,6 +57,9 @@ Table document_title {
   updated_at datetime [note: "最新日時が現在のタイトル"]
   update_user varchar [ref: < user.user_id ]
   title varchar
+  Note: '''
+  ドキュメントのタイトルを履歴管理する。
+  '''
 }
 
 Table document_text {
@@ -58,7 +67,10 @@ Table document_text {
   content_id int [note: "document_id内で連番"]
   updated_at datetime [note: "最新日時が現在の内容"]
   update_user varchar [ref: < user.user_id ]
-  content varchar
+  text varchar
+  Note: '''
+  ドキュメントの本文を履歴管理する。
+  '''
 }
 
 Table directory {
@@ -70,4 +82,3 @@ Table user {
   user_id int [pk, increment]
   name varchar
 }
-
