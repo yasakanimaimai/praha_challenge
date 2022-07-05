@@ -1,0 +1,47 @@
+/*
+【前提】
+・リマインダーアプリなので、データの保持はそれほど重要視しない
+・拡張機能なのでユーザマスタは不要と判断した
+以下は実際のpenpenには無い機能ですが、
+リマインドアプリとしてはありそうな機能なので想定に加えました。
+・リマインドの登録者はリマインドの削除が可能
+・完了したリマインドも含めて一覧表示可能
+・日、曜日、月を指定した場合も送信時間を指定可能
+*/
+
+/*
+【課題】
+・frequencyテーブルがEAVアンチパターンになっていると思われる。
+　当初はtypeを管理するテーブルとvalueを管理するテーブルを作ろうとしたが、
+　valueはtypeごとに分けられるため、frequencyテーブルのようなテーブルになってしまった。
+*/
+
+Table to_user {
+  remind_id uuid [pk, ref: > remind.remind_id]
+  user varchar
+}
+
+Table remind {
+  remind_id uuid [pk]
+  created_at timestamp
+  created_user varchar
+  remind_time int [note: "リマインドする時間。0 〜 24"]
+  last_remind_at timestamp  [note: "最後にリマインドした日時"]
+  status varchar [ref: > remind_status.status, note:"有効か完了かを判定"]
+  frequency_id varchar [ref: - frequency.frequency_id]
+  message varchar
+}
+
+Table remind_status {
+  status varchar [pk, note:"ACTIVE, DONEが入る"]
+  Note: '''
+  ・『SQLアンチパターン』の11章で紹介されていたステータス管理方法
+  ・今回のケースではACTIVEとDONE以外は無さそうなのであまり意味はないかも
+  '''  
+}
+
+Table frequency {
+  frequency_id uuid [pk]
+  type int [note:"DAY, WEEK, MONTHが入る"]
+  type_value int [note: "type_valueごとの送信頻度の値が入る。DAYなら日間隔、WEEKなら曜日のナンバリング"] 
+}
