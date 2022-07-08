@@ -1,0 +1,38 @@
+/*
+【残課題】
+・些細な更新でもcontent_historyにinsertが走るので容量が大きくなる。
+　差分だけ保持する方法でもいいかもしれない。
+*/
+
+Table article {
+  article_id uuid [pk]
+  create_user uuid [ref: > user.user_id]
+  Note:'''
+  ・新しい記事の作成時にarticle_idを発番し、insertする
+  '''
+}
+
+Table article_content {
+  article_id uuid [ref: - article.article_id]
+  content_history_id uuid [ref: - content_history.content_history_id]
+  Note: '''
+  ・記事と内容を紐づける
+  ・articleとcontent_historyが参照し合わないための中間テーブル
+  '''
+}
+
+Table content_history {
+  content_history_id uuid [pk]
+  parent_article_id uuid [ref: > article.article_id]
+  created_at timestamp
+  content varchar
+  Note:'''
+  ・記事の更新を行うたびにinsertし、
+  　そのcontent_history_idでarticle_contentを更新する
+  '''
+}
+
+
+Table user {
+  user_id uuid [pk]
+}
