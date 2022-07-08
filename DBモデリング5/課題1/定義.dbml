@@ -1,8 +1,32 @@
 /*
-【残課題】
-・些細な更新でもcontent_historyにinsertが走るので容量が大きくなる。
-　差分だけ保持する方法でもいいかもしれない。
+【分析のみで使用するために履歴を保持する必要があるか否か】
+・過去の時点のデータがそのまま保存されている場合は履歴データは不要と考える。
+  ・たとえば会計データに商品データが紐づいている場合、商品テーブルが参照されていると、
+    商品に関する情報は過去の時点とは変更されている可能性がある。
+・分析以外にも過去のデータが重要になるケースでは履歴データを残す必要があると思う。
+  ・データの復元が必要
+・イミュータブルデータモデルならある程度過去のデータが残るため、履歴テーブルは不要と思われる
 */
+
+
+/*
+【差分を保持する方式】
+・記事の新規登録
+　> articleにinsert 
+　> article_historyにinsert 
+　> article_history_recordに行数分insert
+・記事の更新
+　> article_historyにinsert 
+　> article_history_recordに更新された行数分insert
+・特定の記事の閲覧
+ > content_historyのcreated_atが最新までのレコードを全て取得し、
+ 　それぞれに紐づくcontent_history_recordを取得し、記事を構築する
+ */
+
+ /*
+ 【残課題】
+ ・差分の検証と記事の構築をアプリケーションが行うため、負担の偏りがある。
+ */
 
 Table article {
   article_id uuid [pk]
@@ -11,6 +35,7 @@ Table article {
   ・新しい記事の作成時にarticle_idを発番し、insertする
   '''
 }
+
 
 Table article_content {
   article_id uuid [ref: - article.article_id]
@@ -21,11 +46,11 @@ Table article_content {
   '''
 }
 
+
 Table content_history {
   content_history_id uuid [pk]
-  parent_article_id uuid [ref: > article.article_id]
+  parent_article_id uuid [pk, ref: > article.article_id]
   created_at timestamp
-  content varchar
   Note:'''
   ・記事の更新を行うたびにinsertし、
   　そのcontent_history_idでarticle_contentを更新する
@@ -35,4 +60,15 @@ Table content_history {
 
 Table user {
   user_id uuid [pk]
+}
+
+
+Table content_history_record {
+  history_id uuid [pk, ref: > content_history.content_history_id]
+  record_number int [pk]
+  content varchar
+  Note:'''
+  ・記事内の1行が1レコード
+  ・更新された行だけinsertする
+  '''
 }
