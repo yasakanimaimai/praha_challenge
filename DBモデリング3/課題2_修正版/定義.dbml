@@ -1,0 +1,99 @@
+/*
+【前提】
+・ルートディレクトリは予め登録されていること
+・復元可能にするため、directoryとdocumentは物理削除しない
+・ディレクトリやファイル移動の移動は、closureテーブルのdelete・insertで実現する
+・サブディレクトリの順番は考慮していない
+*/
+
+/*
+【課題】
+・ユーザのドキュメントに関する権限などは考慮できていない
+*/
+
+Table directory {
+  directory_id int [pk, note:"ルートディレクトリは予め定義"]
+  created_at datetime
+  create_user varchar [ref: > user.user_id]
+  title varchar [note:"更新可。ディレクトリのタイトルは履歴を保持しない"]
+}
+
+Table deleted_directory {
+  directory_id int [pk, ref: - directory.directory_id]
+  deleted_at datetime
+  delete_user varchar [ref: < user.user_id]
+}
+
+Table dicrectory_closure {
+  ancester_directory_id uuid [pk, ref: > directory.directory_id]
+  descendant_directory_id uuid [pk, ref: > directory.directory_id]
+  depth int [note: "直近の子が取得しやすくなるように設置"]
+}
+
+Table dicrectory_content_closure {
+  dicrectory_id uuid [pk, ref: > directory.directory_id]
+  content_id uuid [pk, ref: > content.content_id]
+  depth int [note: "直近の子が取得しやすくなるように設置"]
+}
+
+Table dicrectory_content_order {
+  dicrectory_id uuid [pk, ref: > directory.directory_id]
+  content_id uuid [pk, ref: > content.content_id]
+  order int [note: "ディレクトリ内でのコンテンツの順番を示す"]
+}
+
+Table content {
+  content_id uuid [pk]
+  created_at datetime
+  create_user varchar [ref: > user.user_id]
+  content_type varchar [ref: - content_types.content_type]
+}
+
+Table content_types {
+  content_type varchar [pk]
+  Note: '''
+  コンテンツの種類を分類する際に使用する。
+  現状はドキュメントのみだが、複数種のファイルを扱うことを想定した。
+  '''
+}
+
+Table deleted_content {
+  content_id uuid [pk, ref: - content.content_id]
+  deleted_at datetime
+  delete_user varchar [ref: > user.user_id]
+}
+
+Table document {
+  document_id uuid [pk, ref: - content.content_id]
+  Note: '''
+  ドキュメントタイプのコンテンツを管理する。
+  タイトルとテキストの最新のidを追加してもいいかもしれない。
+  '''
+}
+
+Table document_title {
+  document_id uuid [ref: > document.document_id]
+  title_id uuid [note: "document_id内で連番"]
+  updated_at datetime [note: "最新日時が現在のタイトル"]
+  update_user varchar [ref: < user.user_id ]
+  title varchar
+  Note: '''
+  ドキュメントのタイトルを履歴管理する。
+  '''
+}
+
+Table document_text {
+  document_id uuid [ref: > document.document_id]
+  content_id uuid [note: "document_id内で連番"]
+  updated_at datetime [note: "最新日時が現在の内容"]
+  update_user varchar [ref: < user.user_id ]
+  text varchar
+  Note: '''
+  ドキュメントの本文を履歴管理する。
+  '''
+}
+
+Table user {
+  user_id int [pk, increment]
+  name varchar
+}
