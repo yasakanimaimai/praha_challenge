@@ -1,0 +1,121 @@
+-- テーブル作成
+create table null_test1 (
+	id integer,
+  value varchar
+);
+
+create table null_test2 (
+	id integer,
+	value varchar
+);
+
+
+insert into null_test1 values
+(
+  1,
+  'a'
+)
+,(
+  2,
+  'b'
+)
+,(
+  3,
+  'c'
+)
+
+insert into null_test2 values
+(
+  1,
+  'a'
+)
+,(
+  2,
+  'b'
+)
+,(
+  3,
+  null
+);
+
+-- 検証データ
+-- null_test1
+ id | value 
+----+-------
+  1 | a
+  2 | b
+  3 | c
+
+-- null_test2
+ id | value 
+----+-------
+  1 | a
+  2 | b
+  3 | NULL
+
+
+-- valueが共通するレコードだけ取得(IN)
+SELECT * 
+FROM 
+  null_test1 
+WHERE value IN (
+  SELECT value
+  FROM
+    null_test2
+);
+-- 結果
+ id | value 
+----+-------
+  1 | a
+  2 | b
+
+
+-- valueが共通するレコードだけ取得(EXISTS)
+SELECT * 
+FROM 
+  null_test1 as n1
+WHERE EXISTS (
+  SELECT *
+  FROM
+    null_test2 as n2
+  WHERE
+    n1.value = n2.value
+);
+-- 結果
+ id | value 
+----+-------
+  1 | a
+  2 | b
+
+
+-- valueが共通しないレコードだけ取得(NOT IN)
+SELECT * 
+FROM 
+  null_test1 
+WHERE value NOT IN (
+  SELECT value
+  FROM
+    null_test2
+);
+-- 結果
+ id | value 
+----+-------
+(0 rows)
+「null_test2のnullが'c'かもしれないので取得されない」という解釈
+
+
+-- valueが共通しないレコードだけ取得(NOT EXISTS)
+SELECT * 
+FROM 
+  null_test1 as n1
+WHERE NOT EXISTS (
+  SELECT *
+  FROM
+    null_test2 as n2
+  WHERE
+    n1.value = n2.value
+);
+-- 結果
+ id | value 
+----+-------
+  3 | c
