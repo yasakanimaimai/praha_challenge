@@ -35,6 +35,15 @@
 babel_sample/hello.jsではES6より導入されたimport文によるモジュール管理をつかっている。
 - 本番向け開発はいままでどおりES6で書いて、Jestでテストするときには、(Babelで)CommonJS形式にしよう、というのはよくやられている。
 
+### webpack_sample
+- 検証方法がわからなかったので保留
+
+### typescript_sample
+`jest ./typescript_sample`
+- Jestはテストの実行時にテストコードの型検査を行いません。
+型検査を行いたい場合、代わりに`ts-jest`を使用するか、TypeScriptコンパイラの`tsc`をテストとは別に使用してください。
+→ `jest.config.js`のtransformでtsの場合は`ts-jest`を使うように設定する
+- JSとTSのどちらも一斉にテストするのはできないのか？
 
 <br>
 
@@ -63,5 +72,5 @@ babel_sample/hello.jsではES6より導入されたimport文によるモジュ�
 - [デスクトップ通知が出来るnode.jsライブラリ「node-notifier」](https://co.bsnws.net/article/123)
 - [ES6+Babel7環境でJestする方法](https://qiita.com/riversun/items/6c30a0d0897194677a37)
 - [最新版で学ぶwebpack 5入門JavaScriptのモジュールバンドラ](https://ics.media/entry/12140/#webpack-general)
-- 
-- 
+- [Parcel 入門 ～Parcelはwebpackの代わりになるのか～](https://qiita.com/soarflat/items/3e43368b2d767c730781)
+- [ts-jestを使う時に、jestのバージョンで警告が出る](https://awesome-linus.com/2020/02/12/ts-jest-jest-version-warning/)
