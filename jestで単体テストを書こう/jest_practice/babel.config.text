@@ -1,0 +1,12 @@
+module.exports = {
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        'modules': 'false',
+        'useBuiltIns': 'usage',
+        'targets': '> 0.25%, not dead', // こうすることで、BabelはES6文法で書かれたJavaScriptコードをES5文法にコード変換してくれたりする
+      }
+    ]
+  ],
+};

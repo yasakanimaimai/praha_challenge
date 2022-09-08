@@ -127,3 +127,5 @@ ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 - [これからのOracle Databaseの主流！マルチテナント・コンテナ・データベースに触れる](https://note.com/airitech/n/nfbb4a4b2c204)
 - [Oracle Multitenant](https://www.oracle.com/jp/database/technologies/multitenant/overview.html)
 - [マルチテナント化で知っておきたいデータベースのこと](https://www.slideshare.net/AmazonWebServicesJapan/20220107-multi-tenant-database)
+- [マルチテナント・アーキテクチャ クラウドとオンプレミスの考え方の違い](https://atmarkit.itmedia.co.jp/fdotnet/bookpreview/azureoverview_0301/azureoverview_0301_01.html)
+- 
