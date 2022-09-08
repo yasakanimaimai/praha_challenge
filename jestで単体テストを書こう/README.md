@@ -28,7 +28,12 @@
       - yarnからの実行とjestから実行する時に、内部的にライブラリをどう利用しているのかが分からない
       - そもそもyarnとnpmの両方でライブラリをインストールしてもいいのか？
 
-
+### babel_sample
+`jest ./babel_sample`
+[この記事](https://qiita.com/riversun/items/6c30a0d0897194677a37)を参考にした
+- CommonJSのモジュール管理ではrequire構文をつかうが、
+babel_sample/hello.jsではES6より導入されたimport文によるモジュール管理をつかっている。
+- 本番向け開発はいままでどおりES6で書いて、Jestでテストするときには、(Babelで)CommonJS形式にしよう、というのはよくやられている。
 
 
 <br>
@@ -41,11 +46,11 @@
 ## メモ
 - jestコマンドはファイル単位、ディレクトリ単位、カレントディレクトリ単位でテスト対象を選択できるっぽい
   - 子ディレクトリ内のテストも実行できた
-- CommonJSのモジュール管理ではrequire構文をつかうが、
-さきほど書いたhello.jsではES6より導入されたimport文によるモジュール管理をつかっている。
-そこで、本番向け開発はいままでどおりES6で書いて、Jestでテストするときには、CommonJS形式にしよう、というのが良くやられている。
+
 - [jestの設定は`jest.config.js`以外にも`package.json`でもできる](https://jestjs.io/ja/docs/configuration)みたいだが、両方で管理すると
 `Multiple configurations found`のエラーになった
+- Babelの設定ファイルはいくつかの書き方があり、babel.config.jsを書く、.babelrcに書く、webpack.config.jsの中のbabel-loader設定内に書く、
+などいろんなパターンが許されている。ただし、Jestを使うときは、babel.config.jsまたは.babelrcに書くのが正解。
 
 <br>
 
@@ -55,7 +60,8 @@
 - [warning package.json: No license field](https://qiita.com/kozakura16/items/ebaf8ea58fc49dcbdd73)
 - [【JavaScript】Babelとは何か](https://qiita.com/mzmz__02/items/e6fbe5e30cc3fd13788f)
 - [CommonJSとES Modulesについてまとめる](https://zenn.dev/yodaka/articles/596f441acf1cf3)
-- [ES6+Babel7環境でJestする方法](https://qiita.com/riversun/items/6c30a0d0897194677a37)
 - [デスクトップ通知が出来るnode.jsライブラリ「node-notifier」](https://co.bsnws.net/article/123)
+- [ES6+Babel7環境でJestする方法](https://qiita.com/riversun/items/6c30a0d0897194677a37)
+- [最新版で学ぶwebpack 5入門JavaScriptのモジュールバンドラ](https://ics.media/entry/12140/#webpack-general)
 - 
 - 

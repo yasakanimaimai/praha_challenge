@@ -9,4 +9,11 @@ module.exports = {
       }
     ]
   ],
+  env: {
+    // 環境変数NODE_ENVがtestだった場合の設定
+    test: {
+        // この設定によって現在のnode.js(CommonJSのバージョン)にあわせてトランスパイルする
+        presets: [['@babel/preset-env', {targets: {node: 'current'}}]],
+    },
+},
 };
