@@ -8,7 +8,7 @@ test("should fetch users", async () => {
   const resp = { data: users };
 
   // axiosで取得する値を設定
-  // axiosの取得先の実装と切り離してテストできるところがメリット？
+  // axiosの取得先と切り離してテストできるところがメリット？
   axios.get.mockResolvedValue(resp);
   //axios.get.mockImplementation(() => Promise.resolve(resp))
 

@@ -27,6 +27,7 @@
     - `npm install -g node-notifier`や`npm install --save node-notifier`を試したが変わらなかった
       - yarnからの実行とjestから実行する時に、内部的にライブラリをどう利用しているのかが分からない
       - そもそもyarnとnpmの両方でライブラリをインストールしてもいいのか？
+      → おそらく併用しない方がいい。依存関係で詰まったらnode_modulesを削除してから再度npmかyarnでインストールする
 
 ### babel_sample
 `jest ./babel_sample`
@@ -60,6 +61,19 @@ babel_sample/hello.jsではES6より導入されたimport文によるモジュ�
 <br>
 
 ## 課題２
+- forkしてclone後、jestSample下で`npm install --save --legacy-peer-deps`が必要
+  - `npm install`だけ依存関係でエラーになる
+- エラーが発生することのテスト(toThrow)は、テストする関数を別途関数でラップする必要がある
+  - つまり、expect()は引数の関数の戻り値を受け取るため、関数内部で発生したエラーに戻り値はないので検知できない
+- `expect.assertions(num);`は検査関数が呼ばれた回数(num)を指定する
+  - 非同期処理をテストする際の流れとしては、非同期処理完了後に実行する関数内で戻り値を検査している
+  「returnを付けないと、非同期処理の終了を待たずに`it`が終了してしまう。」
+  とドキュメントにあるが、付けなくてもテストが通る。
+  ただ元々の`asyncSumOfArray`内でsettime関数を使うと、returnが必要になる。
+- `const a = require('./A');`はaインスタンスを持つが`import A from './A'`はAをインポートしただけ
+- `jest.spyOn()`は、オブジェクトを引数に指定するのに対し、`jest.mock()`は、モジュールを引数に指定します。
+つまり、mockの対象が引数に指定したオブジェクトだけなのか、モジュールそのものなのかという違いがあります。
+
 
 <br>
 
@@ -72,10 +86,14 @@ babel_sample/hello.jsではES6より導入されたimport文によるモジュ�
 `Multiple configurations found`のエラーになった
 - Babelの設定ファイルはいくつかの書き方があり、babel.config.jsを書く、.babelrcに書く、webpack.config.jsの中のbabel-loader設定内に書く、
 などいろんなパターンが許されている。ただし、Jestを使うときは、babel.config.jsまたは.babelrcに書くのが正解。
+- カバレッジレポートを取得するためには`jest.config.js`を設定するか、`--coverage`の引数が必要
+
+
 
 <br>
 
 ## 参考記事
+- [公式ドキュメント](https://jestjs.io/docs/ja/getting-started)
 - [npm install の --save-dev って何？](https://qiita.com/kohecchi/items/092fcbc490a249a2d05c)
 - [npmとは　yarnとは](https://qiita.com/Hai-dozo/items/90b852ac29b79a7ea02b)
 - [warning package.json: No license field](https://qiita.com/kozakura16/items/ebaf8ea58fc49dcbdd73)
@@ -90,3 +108,9 @@ babel_sample/hello.jsではES6より導入されたimport文によるモジュ�
 - [リファレンス](https://deltice.github.io/jest/docs/ja/expect.html)
 - [【理論】Jest 3 セットアップ関数](https://zenn.dev/tentel/books/08b63492b00f0a/viewer/b98847)
 - [【Jest】モック化はこれでOK！](https://qiita.com/YSasago/items/6109c5d3fbdbffa31c9f#%E7%89%B9%E5%AE%9A%E3%81%AE%E9%96%A2%E6%95%B0%E3%82%92%E3%83%A2%E3%83%83%E3%82%AF%E5%8C%96%E3%81%97%E3%82%88%E3%81%86)
+- [【TypeScript】TypeScriptでの3つの関数の書き方](https://www.sekky0905.com/entry/2016/08/27/%E3%80%90TypeScript%E3%80%91TypeScript%E3%81%A7%E3%81%AE3%E3%81%A4%E3%81%AE%E9%96%A2%E6%95%B0%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9)
+- [【理論】Jest 2 非同期コードのテスト](https://zenn.dev/tentel/books/08b63492b00f0a/viewer/932c4f)
+- [Node.jsのDependency injection：依存性注入の勉強をしてみた](https://qiita.com/okumurakengo/items/98d02552fdb88f63749c)
+- [TypeScriptのDIとTsyringeについて](https://zenn.dev/chida/articles/1f7df8f2beb6b6)
+- [[Jest+TypeScript] クラスと関数のモック化](https://qiita.com/yuma-ito-bd/items/38c929eb5cccf7ce501e)
+- [【備忘録】JestのspyOn()とmock()の使い方について](https://qiita.com/m-yo-biz/items/e9b6298d111ff6d03a5e)
