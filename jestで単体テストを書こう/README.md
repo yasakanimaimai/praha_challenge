@@ -73,9 +73,66 @@ babel_sample/hello.jsではES6より導入されたimport文によるモジュ�
 - `const a = require('./A');`はaインスタンスを持つが`import A from './A'`はAをインポートしただけ
 - `jest.spyOn()`は、オブジェクトを引数に指定するのに対し、`jest.mock()`は、モジュールを引数に指定します。
 つまり、mockの対象が引数に指定したオブジェクトだけなのか、モジュールそのものなのかという違いがあります。
-
+- インターフェイスを使用しなくてもテストmockはできたが、インターフェイスを作った方がいいのか？
 
 <br>
+
+## 課題3
+### 「そもそも、なぜ元の関数はカバレッジ100%のテストを書けなかったのでしょうか？」
+
+テスト対象の関数の処理結果が、別モジュールの実装に依存していたため。
+例えば`asyncSumOfArraySometimesZero`は`DatabaseMock`がエラーをthrowするかどうかで通過するコードが変わり、
+一度の実行では正常処理かエラー処理の片方しか通らないテストになるため。
+
+<br>
+
+### 「依存性の注入とは何でしょうか？どのような問題を解決するために使われるのでしょうか？ 
+### 依存性の注入を実施することで、モジュール同士の結合度の強さはどのように変化したでしょうか？」
+
+依存しているモジュールのインスタンスをそのまま利用するのではなく、
+モジュールのインターフェイスを外部から受け取り、それを利用すること。
+これによって、処理が１つの実装に依存しなくなるため、結合度が低くなる。
+インターフェイスを実装していればどんなインスタンスも利用できるため、
+処理の交換や使い分けが簡単になる。
+例えば課題２では、テスト対象の関数が外部モジュールに依存していたが、
+インターフェイスを実装したmockを利用できるようにすることで
+正常処理とエラー処理のテストケースを確実に確認できるようになった。
+
+<br>
+
+### 「今回のような単体テストで外部サービスとの通信が発生すると、どのようなデメリットがあるでしょうか？」
+
+もし外部サービスが有料だったらテストだけでコストが掛かる
+通信状況によってテストの精度落ちる
+
+<br>
+
+### 「なぜProperty Based Testingの考え方がコード品質を向上してくれる可能性があるのでしょうか？
+### 逆に採用しない方が良いケースはあるのでしょうか？」
+
+Property Based Testingとは
+出力値そのものではなく、出力値が持つ特性(propety)が満たされていることを通過条件とするテストの考え方
+手法としては、入力値がとりうる範囲を決め、その範囲内で大量のランダム値を機械的に生成し、大量の出力に対して上記の検証を行う
+有効なケースとしては、テストオラクル問題など、ロジックが複雑すぎて出力値そのものの判定が難しい時
+採用しない方が良いケースとして、伝票値引きの按分ロジックなどは、ロジックが複雑だからといって一円単位の誤差が許されないので特定値で検証する必要がある。
+
+Example-based testingとは
+無数の入力値候補から何かしらの基準で入力値を選択し、その出力値が正しいことを通過条件とする一般的なテストの考え方
+有効なケースとしては、出力値が手動で判断できる時？
+
+> たとえば2つの自然数の足し算を行うメソッドがあるとして。
+「3, 4」という入力に対して「7」が出力されることを確認するのが従来のExample-based testing。
+出力がもつべきpropertyとして、たとえば「出力値は自然数である」「出力値は、どちらの入力値よりも1以上大きい」といったstatementを定義し、多数の入力ペアについてこのstatementを検証するのがProperty-based testingと考えればよいでしょうか。
+[Property-based Testing、そしてExample-based testingとは何か。](https://www.kzsuzuki.com/entry/PropertyBasedTesting)
+
+<br>
+
+### 「単体テストケースを増やしても可読性、保守性、実行速度などに問題が起きないよう工夫できることを3つ考えてみましょう」
+
+- [Four-Phase Test](https://zenn.dev/kakkoyakakko/articles/896e7d0e04eff0)など、テストコードの書き方の統一ルールを導入する
+- テストケース間で共通しているところは、クラスやメソッドに抜き出す
+  - やりすぎるとテストコードのテストコードが必要になることもある？
+- DB接続、サーバ通信、ファイルシステムなど外部に接続する処理はmock化するか、結合テストとして行う
 
 
 ## メモ
@@ -114,3 +171,14 @@ babel_sample/hello.jsではES6より導入されたimport文によるモジュ�
 - [TypeScriptのDIとTsyringeについて](https://zenn.dev/chida/articles/1f7df8f2beb6b6)
 - [[Jest+TypeScript] クラスと関数のモック化](https://qiita.com/yuma-ito-bd/items/38c929eb5cccf7ce501e)
 - [【備忘録】JestのspyOn()とmock()の使い方について](https://qiita.com/m-yo-biz/items/e9b6298d111ff6d03a5e)
+- [DI (依存性注入) って何のためにするのかわからない人向けに頑張って説明してみる](https://qiita.com/okazuki/items/0c17a161a921847cd080)
+- [Property based testing を試してみよう](https://qiita.com/freddiefujiwara/items/e345f4a0610bf08deea7)
+- [Property-based Testingの使い方](https://kangaeru-chikara.info/programming/article30)
+- [Property-based Testing、そしてExample-based testingとは何か。](https://www.kzsuzuki.com/entry/PropertyBasedTesting)
+- [実行可能性と可読性を考慮した形式使用記述スタイル](https://www.jstage.jst.go.jp/article/jssst/27/2/27_2_2_130/_pdf)
+- [【単体テスト実践ガイド】単体テストの実施方法から意識するべきポイント、自動化の方法まで詳しく解説](https://www.praha-inc.com/lab/posts/unit-testing)
+- [ユニットテストの可読性を上げる - Four-Phase Test](https://zenn.dev/kakkoyakakko/articles/896e7d0e04eff0)
+- [自動テスト速度改善 - 自動テストが品質のボトルネックとならないために](https://developers.freee.co.jp/entry/improving-ci-testing-for-next-quality)
+- [今度こそユニットテストを書き始めるために](https://zenn.dev/koduki/articles/93ebc677493e7a)
+- [ふつうのユニットテストのための７つのルール](https://zenn.dev/koduki/articles/106012fdd422fa67eae6)
+- [.NET Core と .NET Standard での単体テストのベスト プラクティス](https://docs.microsoft.com/ja-jp/dotnet/core/testing/unit-testing-best-practices#arranging-your-tests)
