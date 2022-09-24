@@ -55,13 +55,13 @@
 - メッセージの削除はステータスで表現する
   - 実際のslackでは、メッセージを削除しても紐づくスレッドメッセージは残り、関係性も維持される
   それを実現するためにmessageテーブルから物理削除しない
-#### thread_relation
+### thread_relation
 - メッセージもスレッドメッセージも`message`テーブルに登録する
 - スレッドメッセージを登録するときは`thread_relation`で親子関係を示す
 - メッセージを登録したときは`thread_relation`の親子ともに自身のメッセージidを示す(親レコード抽出を簡単にするため)
-#### belong_to_workspace/belong_to_channel
+### belong_to_workspace/belong_to_channel
 - 参加したらレコードを登録する。脱退したら物理削除する
-#### user
+### user
 - slackではユーザアカウント自体を削除するユースケースが無いようなのでinsertのみ考える
   - もしユーザアカウントを削除するユースケースが生まれたらどうするか。いい方法が思い浮かばない
 

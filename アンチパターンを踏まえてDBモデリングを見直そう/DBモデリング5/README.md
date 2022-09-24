@@ -44,7 +44,9 @@
 ### article_content_history/select_content
 - 記事を更新するたびに、その時点での本文が蓄積されていく
 - 記事作成時/更新時/過去記事選択時に`select_content`に対象の履歴IDを持たせる
-  - `article`にキャッシュとして`current_content`を持たせようとしたが、履歴一覧のうちどれを選択しているのか判断できる方がいいと考えた
+  - `article`にキャッシュとして`current_content`を持たせようとしたが、
+  履歴一覧のうちどの記事を選択しているのかをIDで判断できる方がいいと考えたため、持たせなかった。
+
 
 <br>
 
