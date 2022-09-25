@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mock survey mock.calls custom mathcer 1`] = `
+[MockFunction] {
+  "calls": [
+    [
+      0,
+    ],
+    [
+      1,
+    ],
+  ],
+  "results": [
+    {
+      "type": "return",
+      "value": 42,
+    },
+    {
+      "type": "return",
+      "value": 43,
+    },
+  ],
+}
+`;

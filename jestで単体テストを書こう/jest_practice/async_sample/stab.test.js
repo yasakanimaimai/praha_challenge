@@ -1,4 +1,4 @@
-getPostId = jest.fn()
+const getPostId = jest.fn()
 getPostId.mockReturnValue(1)
 
 test('the post id is 1', async () => {

@@ -1,3 +1,7 @@
+// `jest ./setup_sample`
+// [この記事](https://zenn.dev/tentel/books/08b63492b00f0a/viewer/b98847)を参考にした。
+
+
 const store = {
   users: [],
 };
