@@ -4,7 +4,16 @@
 
 ## 課題1
 
-![](NULLの評価一覧.png)
+```sql
+SELECT NULL = 0;  -- NULL
+SELECT NULL = NULL; -- NULL
+SELECT NULL <> NULL; -- NULL
+SELECT NULL AND TRUE; -- NULL
+SELECT NULL AND FALSE; -- FALSE
+SELECT NULL OR TRUE; -- TRUE
+SELECT NULL IS NULL; -- TRUE
+SELECT NULL IS NOT NULL; -- FALSE
+```
 - NULLはTRUEでもFALSEでもなく「値が存在しない状態」
 - 等式・不等式では評価できず、`IS`や`IS NOT`が必要
 - `NULL AND TRUE`は`NULL`に入る値が`TRUE`か`FALSE`かで結果が変わるため`NULL`が出力される
