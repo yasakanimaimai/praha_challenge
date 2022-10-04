@@ -223,7 +223,7 @@ mockReset()は、モックのstateを完全にリセットしたい際に便利�
 > // 上記の記述は以下と同様
 > // const mock = jest.fn(() => 1)
 > ```
-> [Facebook製のJavaScriptテストツール「Jest」の逆引き使用例](https://qiita.com/chimame/items/e97883fd46b67529d59f)
+> [Facebook製のJavaScriptテストツール「Jest」の逆引き使用例](https://qiita.com/chimame/items/e97883fd46b67529d59f) 
 
 > ・ jest.spyOn()とjest.mock()は、どちらもメソッドをmockするためのもので、
 テストコードの中でmock関数を定義する際に使用します
