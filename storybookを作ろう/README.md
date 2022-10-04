@@ -51,11 +51,11 @@ GUIのテスト領域で、テストしやすいものとテストしにくい�
 > - Each child in an array or iterator should have a unique “key” prop.
 >
 
-> [React: Create React Appでプロジェクトがつくれない - Qiita](https://qiita.com/FumioNonaka/items/076af56213afc7e29853)
+> [React: Create React Appでプロジェクトがつくれない - Qiita](https://qiita.com/FumioNonaka/items/076af56213afc7e29853)  
 > npxのキャッシュをクリアしてください。
 > `npx clear-npx-cache`
 
-> [propsとstateのイメージをつかむ【はじめてのReact】 - Qiita](https://qiita.com/rio_threehouse/items/7632f5a593cf218b9504)
+> [propsとstateのイメージをつかむ【はじめてのReact】 - Qiita](https://qiita.com/rio_threehouse/items/7632f5a593cf218b9504)  
 > props : 親コンポーネントから子コンポーネントへ値を渡すための仕組み
 > state : 各コンポーネントごとに持つ、コンポーネントの状態を管理する仕組み
 
