@@ -104,7 +104,7 @@ FROM
 WHERE EXISTS (
   SELECT *
   FROM
-    table2 as n2
+    table2 as t2
   WHERE
     t1.value = t2.value
 );
@@ -117,7 +117,7 @@ FROM
 WHERE NOT EXISTS (
   SELECT *
   FROM
-    table2 as n2
+    table2 as t2
   WHERE
     t1.value = t2.value
 );
