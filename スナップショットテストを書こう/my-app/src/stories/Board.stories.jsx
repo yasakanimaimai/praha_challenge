@@ -5,6 +5,9 @@ import { Board } from '../Board';
 export default {
   title: 'MyApp/Board',
   component: Board,
+  // storybook.test.jsにmultiSnapshotWithOptionsを設定した場合にparametersが必要
+  // fileNameで指定したファイル名でスナップショットファイルが作成される
+  parameters: { fileName: __filename },
 };
 
 const Template = (args) => <Board {...args} />;

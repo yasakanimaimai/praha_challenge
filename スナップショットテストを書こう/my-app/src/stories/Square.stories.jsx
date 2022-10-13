@@ -5,6 +5,7 @@ import { Square } from '../Square';
 export default {
   title: 'MyApp/Square',
   component: Square,
+  parameters: { fileName: __filename },
 };
 
 const Template = (args) => <Square {...args} />;
