@@ -87,6 +87,7 @@ describe('getFirstNameThrowIfLong', () => {
     it('firstNameの長さが上限以下ならfirstNameを返す', async () => {
       const maxNameLength = 4;
       await expect(getFirstNameThrowIfLong(maxNameLength, nameApiService)).resolves.toBe('john');
+      expect(nameApiService.getFirstName).toBeCalled();
     });
 
     it('firstNameの長さが上限を超えるならErrorを返す', async () => {
