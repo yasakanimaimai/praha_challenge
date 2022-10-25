@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots MyApp/Square Circle Square 1`] = `
+<button
+  className="square"
+  onClick={[Function]}
+>
+  O
+</button>
+`;
+
+exports[`Storyshots MyApp/Square Default Square 1`] = `
+<button
+  className="square"
+  onClick={[Function]}
+/>
+`;
+
+exports[`Storyshots MyApp/Square Triangle Square 1`] = `
+<button
+  className="square"
+  onClick={[Function]}
+>
+  △
+</button>
+`;
+
+exports[`Storyshots MyApp/Square X Square 1`] = `
+<button
+  className="square"
+  onClick={[Function]}
+>
+  X
+</button>
+`;
