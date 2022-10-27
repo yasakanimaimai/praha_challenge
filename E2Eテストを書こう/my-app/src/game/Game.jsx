@@ -7,11 +7,9 @@ export class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      history: [{
-        squares: Array(9).fill(null),
-      }],
-      stepNumber: 0,
-      xIsNext: true,
+      history: props.history,
+      stepNumber: props.stepNumber,
+      xIsNext: props.xIsNext,
     };
   };
 
@@ -59,6 +57,8 @@ export class Game extends React.Component {
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
+    } else if (!winner && this.state.stepNumber == 9) {
+      status = 'Draw!';
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
@@ -72,7 +72,7 @@ export class Game extends React.Component {
           />
         </div>
         <div className="game-info">
-          <div>{status}</div>
+          <div e2e="game-message">{status}</div>
           <ol>{moves}</ol>
         </div>
       </div>

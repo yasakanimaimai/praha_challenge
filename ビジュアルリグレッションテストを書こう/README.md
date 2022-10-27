@@ -40,3 +40,4 @@ storyshotsのimageSnapshotを使ってVRTをする場合、
 > - 開発マシンに入るものは本物を使う、入らないものはモックするという基準をt_wadaさんはオススメしているそうです。
 
 > [E2Eテストフレームワークはどれを選べばいいんじゃい！](https://zenn.dev/taiga533/articles/f6e1ef07a8676e)
+> [Visual Regression Testing はじめました – 具体的な運用 Tips – PSYENCE:MEDIA](https://blog.recruit.co.jp/rmp/front-end/visual-regression-testing/#h-2)

@@ -68,6 +68,7 @@
     "@whitespace/storybook-addon-html": "^5.0.0",
     "babel-plugin-named-exports-order": "^0.0.2",
     "chromatic": "^6.10.4",
+    "cypress": "^10.10.0",
     "prop-types": "^15.8.1",
     "webpack": "^5.74.0"
   },

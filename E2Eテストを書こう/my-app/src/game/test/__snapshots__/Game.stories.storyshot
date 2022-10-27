@@ -13,30 +13,17 @@ exports[`Storyshots MyApp/Game Default Game 1`] = `
       >
         <button
           className="square"
+          e2e={0}
           onClick={[Function]}
         />
         <button
           className="square"
+          e2e={1}
           onClick={[Function]}
         />
         <button
           className="square"
-          onClick={[Function]}
-        />
-      </div>
-      <div
-        className="board-row"
-      >
-        <button
-          className="square"
-          onClick={[Function]}
-        />
-        <button
-          className="square"
-          onClick={[Function]}
-        />
-        <button
-          className="square"
+          e2e={2}
           onClick={[Function]}
         />
       </div>
@@ -45,14 +32,36 @@ exports[`Storyshots MyApp/Game Default Game 1`] = `
       >
         <button
           className="square"
+          e2e={3}
           onClick={[Function]}
         />
         <button
           className="square"
+          e2e={4}
           onClick={[Function]}
         />
         <button
           className="square"
+          e2e={5}
+          onClick={[Function]}
+        />
+      </div>
+      <div
+        className="board-row"
+      >
+        <button
+          className="square"
+          e2e={6}
+          onClick={[Function]}
+        />
+        <button
+          className="square"
+          e2e={7}
+          onClick={[Function]}
+        />
+        <button
+          className="square"
+          e2e={8}
           onClick={[Function]}
         />
       </div>
@@ -61,7 +70,9 @@ exports[`Storyshots MyApp/Game Default Game 1`] = `
   <div
     className="game-info"
   >
-    <div>
+    <div
+      e2e="game-message"
+    >
       Next player: X
     </div>
     <ol>
@@ -70,6 +81,175 @@ exports[`Storyshots MyApp/Game Default Game 1`] = `
           onClick={[Function]}
         >
           Go to game start
+        </button>
+      </li>
+    </ol>
+  </div>
+</div>
+`;
+
+exports[`Storyshots MyApp/Game Draw Game 1`] = `
+<div
+  className="game"
+>
+  <div
+    className="game-board"
+  >
+    <div>
+      <div
+        className="board-row"
+      >
+        <button
+          className="square"
+          e2e={0}
+          onClick={[Function]}
+        >
+          X
+        </button>
+        <button
+          className="square"
+          e2e={1}
+          onClick={[Function]}
+        >
+          O
+        </button>
+        <button
+          className="square"
+          e2e={2}
+          onClick={[Function]}
+        >
+          X
+        </button>
+      </div>
+      <div
+        className="board-row"
+      >
+        <button
+          className="square"
+          e2e={3}
+          onClick={[Function]}
+        >
+          X
+        </button>
+        <button
+          className="square"
+          e2e={4}
+          onClick={[Function]}
+        >
+          O
+        </button>
+        <button
+          className="square"
+          e2e={5}
+          onClick={[Function]}
+        >
+          X
+        </button>
+      </div>
+      <div
+        className="board-row"
+      >
+        <button
+          className="square"
+          e2e={6}
+          onClick={[Function]}
+        >
+          O
+        </button>
+        <button
+          className="square"
+          e2e={7}
+          onClick={[Function]}
+        >
+          X
+        </button>
+        <button
+          className="square"
+          e2e={8}
+          onClick={[Function]}
+        >
+          O
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    className="game-info"
+  >
+    <div
+      e2e="game-message"
+    >
+      Draw!
+    </div>
+    <ol>
+      <li>
+        <button
+          onClick={[Function]}
+        >
+          Go to game start
+        </button>
+      </li>
+      <li>
+        <button
+          onClick={[Function]}
+        >
+          Go to move #1
+        </button>
+      </li>
+      <li>
+        <button
+          onClick={[Function]}
+        >
+          Go to move #2
+        </button>
+      </li>
+      <li>
+        <button
+          onClick={[Function]}
+        >
+          Go to move #3
+        </button>
+      </li>
+      <li>
+        <button
+          onClick={[Function]}
+        >
+          Go to move #4
+        </button>
+      </li>
+      <li>
+        <button
+          onClick={[Function]}
+        >
+          Go to move #5
+        </button>
+      </li>
+      <li>
+        <button
+          onClick={[Function]}
+        >
+          Go to move #6
+        </button>
+      </li>
+      <li>
+        <button
+          onClick={[Function]}
+        >
+          Go to move #7
+        </button>
+      </li>
+      <li>
+        <button
+          onClick={[Function]}
+        >
+          Go to move #8
+        </button>
+      </li>
+      <li>
+        <button
+          onClick={[Function]}
+        >
+          Go to move #9
         </button>
       </li>
     </ol>

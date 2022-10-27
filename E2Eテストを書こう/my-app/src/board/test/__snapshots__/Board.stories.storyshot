@@ -7,40 +7,21 @@ exports[`Storyshots MyApp/Board All Circle 1`] = `
   >
     <button
       className="square"
+      e2e={0}
       onClick={[Function]}
     >
       O
     </button>
     <button
       className="square"
+      e2e={1}
       onClick={[Function]}
     >
       O
     </button>
     <button
       className="square"
-      onClick={[Function]}
-    >
-      O
-    </button>
-  </div>
-  <div
-    className="board-row"
-  >
-    <button
-      className="square"
-      onClick={[Function]}
-    >
-      O
-    </button>
-    <button
-      className="square"
-      onClick={[Function]}
-    >
-      O
-    </button>
-    <button
-      className="square"
+      e2e={2}
       onClick={[Function]}
     >
       O
@@ -51,18 +32,46 @@ exports[`Storyshots MyApp/Board All Circle 1`] = `
   >
     <button
       className="square"
+      e2e={3}
       onClick={[Function]}
     >
       O
     </button>
     <button
       className="square"
+      e2e={4}
       onClick={[Function]}
     >
       O
     </button>
     <button
       className="square"
+      e2e={5}
+      onClick={[Function]}
+    >
+      O
+    </button>
+  </div>
+  <div
+    className="board-row"
+  >
+    <button
+      className="square"
+      e2e={6}
+      onClick={[Function]}
+    >
+      O
+    </button>
+    <button
+      className="square"
+      e2e={7}
+      onClick={[Function]}
+    >
+      O
+    </button>
+    <button
+      className="square"
+      e2e={8}
       onClick={[Function]}
     >
       O
@@ -78,40 +87,21 @@ exports[`Storyshots MyApp/Board All Triangle 1`] = `
   >
     <button
       className="square"
+      e2e={0}
       onClick={[Function]}
     >
       △
     </button>
     <button
       className="square"
+      e2e={1}
       onClick={[Function]}
     >
       △
     </button>
     <button
       className="square"
-      onClick={[Function]}
-    >
-      △
-    </button>
-  </div>
-  <div
-    className="board-row"
-  >
-    <button
-      className="square"
-      onClick={[Function]}
-    >
-      △
-    </button>
-    <button
-      className="square"
-      onClick={[Function]}
-    >
-      △
-    </button>
-    <button
-      className="square"
+      e2e={2}
       onClick={[Function]}
     >
       △
@@ -122,18 +112,46 @@ exports[`Storyshots MyApp/Board All Triangle 1`] = `
   >
     <button
       className="square"
+      e2e={3}
       onClick={[Function]}
     >
       △
     </button>
     <button
       className="square"
+      e2e={4}
       onClick={[Function]}
     >
       △
     </button>
     <button
       className="square"
+      e2e={5}
+      onClick={[Function]}
+    >
+      △
+    </button>
+  </div>
+  <div
+    className="board-row"
+  >
+    <button
+      className="square"
+      e2e={6}
+      onClick={[Function]}
+    >
+      △
+    </button>
+    <button
+      className="square"
+      e2e={7}
+      onClick={[Function]}
+    >
+      △
+    </button>
+    <button
+      className="square"
+      e2e={8}
       onClick={[Function]}
     >
       △
@@ -149,40 +167,21 @@ exports[`Storyshots MyApp/Board All X 1`] = `
   >
     <button
       className="square"
+      e2e={0}
       onClick={[Function]}
     >
       X
     </button>
     <button
       className="square"
+      e2e={1}
       onClick={[Function]}
     >
       X
     </button>
     <button
       className="square"
-      onClick={[Function]}
-    >
-      X
-    </button>
-  </div>
-  <div
-    className="board-row"
-  >
-    <button
-      className="square"
-      onClick={[Function]}
-    >
-      X
-    </button>
-    <button
-      className="square"
-      onClick={[Function]}
-    >
-      X
-    </button>
-    <button
-      className="square"
+      e2e={2}
       onClick={[Function]}
     >
       X
@@ -193,18 +192,46 @@ exports[`Storyshots MyApp/Board All X 1`] = `
   >
     <button
       className="square"
+      e2e={3}
       onClick={[Function]}
     >
       X
     </button>
     <button
       className="square"
+      e2e={4}
       onClick={[Function]}
     >
       X
     </button>
     <button
       className="square"
+      e2e={5}
+      onClick={[Function]}
+    >
+      X
+    </button>
+  </div>
+  <div
+    className="board-row"
+  >
+    <button
+      className="square"
+      e2e={6}
+      onClick={[Function]}
+    >
+      X
+    </button>
+    <button
+      className="square"
+      e2e={7}
+      onClick={[Function]}
+    >
+      X
+    </button>
+    <button
+      className="square"
+      e2e={8}
       onClick={[Function]}
     >
       X
@@ -220,30 +247,17 @@ exports[`Storyshots MyApp/Board Default Board 1`] = `
   >
     <button
       className="square"
+      e2e={0}
       onClick={[Function]}
     />
     <button
       className="square"
+      e2e={1}
       onClick={[Function]}
     />
     <button
       className="square"
-      onClick={[Function]}
-    />
-  </div>
-  <div
-    className="board-row"
-  >
-    <button
-      className="square"
-      onClick={[Function]}
-    />
-    <button
-      className="square"
-      onClick={[Function]}
-    />
-    <button
-      className="square"
+      e2e={2}
       onClick={[Function]}
     />
   </div>
@@ -252,14 +266,36 @@ exports[`Storyshots MyApp/Board Default Board 1`] = `
   >
     <button
       className="square"
+      e2e={3}
       onClick={[Function]}
     />
     <button
       className="square"
+      e2e={4}
       onClick={[Function]}
     />
     <button
       className="square"
+      e2e={5}
+      onClick={[Function]}
+    />
+  </div>
+  <div
+    className="board-row"
+  >
+    <button
+      className="square"
+      e2e={6}
+      onClick={[Function]}
+    />
+    <button
+      className="square"
+      e2e={7}
+      onClick={[Function]}
+    />
+    <button
+      className="square"
+      e2e={8}
       onClick={[Function]}
     />
   </div>
