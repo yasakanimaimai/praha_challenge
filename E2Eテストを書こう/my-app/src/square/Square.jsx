@@ -5,7 +5,7 @@ export function Square(props) {
     <button 
       className='square'
       onClick={props.onClick}
-      e2e={props.e2e}
+      data-cy={props.indexNumber}
     >
       {props.value}
     </button>
