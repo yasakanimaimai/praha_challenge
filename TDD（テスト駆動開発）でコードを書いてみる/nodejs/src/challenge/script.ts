@@ -1,19 +1,27 @@
-export const multiply = (...numbers: number[]): number => {
-  return numbers.reduce((previousValue, currentValue) => previousValue * currentValue);
-};
+import { Command } from "commander";
 
-export const add = (...numbers: number[]): number => {
-  return numbers.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
-};
+import { fourArithmeticOperations } from "./modules/fourArithmeticOperations";
+import add from "./modules/add";
+import divide from "./modules/divide";
+import multiply from "./modules/multiply";
+import subtract from "./modules/subtract";
 
-export const subtract = (...numbers: number[]): number => {
-  return numbers.reduce((previousValue, currentValue) => previousValue - currentValue);
-};
+function main() {
+  const program = new Command();
+  program.parse(process.argv);
 
-export const divide = (...numbers: number[]): number => {
-  return numbers.reduce((previousValue, currentValue) => previousValue / currentValue);
-};
+  const executor = new fourArithmeticOperations({
+    add,
+    multiply,
+    subtract,
+    divide
+  });
+  
+  const operatorName = program.args[0];
+  const numbers = program.args.slice(1).map(str => parseInt(str, 10));
+  const result = executor.exec(operatorName, ...numbers);
 
-for(var i = 0;i < process.argv.length; i++){
-  console.log("argv[" + i + "] = " + process.argv[i]);
+  console.log('result: ' + result);
 }
+
+main();
