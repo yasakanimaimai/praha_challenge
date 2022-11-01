@@ -103,4 +103,5 @@ BDDではシステム/機能レベルの振る舞いもゴールに加えてい�
 - [アジャイル開発における「TDD」と「BDD」 - SHIFT ASIA -ソフトウェア品質保証のプロフェッショナル-SHIFT ASIA -ソフトウェア品質保証のプロフェッショナル-](https://shiftasia.com/ja/column/%E3%82%A2%E3%82%B8%E3%83%A3%E3%82%A4%E3%83%AB%E9%96%8B%E7%99%BA%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8Btdd%E3%81%A8bdd/)
 - [TDD／BDDの思想とテスティングフレームワークの関係を整理しよう：いまさら聞けないTDD/BDD超入門（2）（1/3 ページ） - ＠IT](https://atmarkit.itmedia.co.jp/ait/articles/1403/25/news033.html)
 - [TypeScriptで始めるNode.js入門 - ICS MEDIA](https://ics.media/entry/4682/)
+- 参考にしたリポジトリ[praha-challenge/test/6_TDD（テスト駆動開発）でコードを書いてみる/task_15_tomoki_ishihara at main · kooooichi24/praha-challenge](https://github.com/kooooichi24/praha-challenge/tree/main/test/6_TDD%EF%BC%88%E3%83%86%E3%82%B9%E3%83%88%E9%A7%86%E5%8B%95%E9%96%8B%E7%99%BA%EF%BC%89%E3%81%A7%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E6%9B%B8%E3%81%84%E3%81%A6%E3%81%BF%E3%82%8B/task_15_tomoki_ishihara)
 - import文はシングルクォーテーションじゃないとエラーになる
