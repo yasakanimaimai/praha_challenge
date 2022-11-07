@@ -6,6 +6,7 @@ import initStoryshots from '@storybook/addon-storyshots';
 import { imageSnapshot } from '@storybook/addon-storyshots-puppeteer';
 
 // Function to customize the snapshot location
+// この設定によってファイル名ごとに保存場所を切り替えられる。おそらく。
 const getMatchOptions = ({ context: { fileName } }) => {
   // Generates a custom path based on the file name and the custom directory.
   const snapshotPath = path.join(path.dirname(fileName), './test/__snapshotsimage__');

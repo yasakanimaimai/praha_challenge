@@ -33,7 +33,6 @@ export class fourArithmeticOperations {
         return this.operators.divide(numbers);
       default:
         return '';
-        break;
     }
   }
 }

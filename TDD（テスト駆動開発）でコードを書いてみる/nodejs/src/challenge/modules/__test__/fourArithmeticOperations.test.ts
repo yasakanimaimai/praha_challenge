@@ -34,6 +34,17 @@ describe('fourArithmeticOperations', () => {
     expect(() => executor.exec('add', ...arg31)).toThrowError('Over arg number');
   });
 
+  it('(境界値)計算対象の引数が1なら実行される', () => {
+    const executor = new fourArithmeticOperations(operators);
+    expect(executor.exec('add', 1)).toBe(1);
+  });
+
+  it('(境界値)計算対象の引数が30なら実行される', () => {
+    const executor = new fourArithmeticOperations(operators);
+    const args = Array(30).fill(Number(1));
+    expect(executor.exec('add', ...args)).toBe(30);
+  });
+
   it('addを指定するとadd()が実行される',() => {
     const spyAdd = jest.spyOn(operators, 'add');
     const executor = new fourArithmeticOperations(operators);
