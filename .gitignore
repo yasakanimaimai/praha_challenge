@@ -3,3 +3,4 @@
 /storybookを作ろう/storybook_samples/*
 /*/node_modules/*
 /*/*/node_modules/*
+/*/*/*/node_modules/*

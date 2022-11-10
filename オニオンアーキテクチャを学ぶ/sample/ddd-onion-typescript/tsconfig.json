@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "strict": true,
+    "noImplicitAny": false,
+    "moduleResolution": "Node",
+    "allowJs": true,
+    "esModuleInterop": true, // これを追加
+    "types": ["reflect-metadata"],// グローバルなモジュールは宣言しとくやつ？
+    "experimentalDecorators": true, // デコレータに対するサポートの警告を出すか
+    "strictPropertyInitialization": false,// コンストラクタで初期化するのをチェックするか
+  },
+  "include": ["./src/**/*"]
+}
