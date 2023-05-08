@@ -1,17 +1,5 @@
 // オープンクローズドの原理に則している例
-class calculateFeeServiceCorrenct {
-
-  private BASE_SHIPPING_FEE = 100;
-
-  // ユーザランクが増えたときも既存コードの修正が不要
-  // ランクごとにUserインターフェースを実装したクラスを用意すればOK
-  calculateFee(user: User, accountingFee: number): number {
-    const shippingFee = user.getShippingFee(this.BASE_SHIPPING_FEE);
-    return shippingFee + accountingFee;
-  }
-}
-
-// 
+// ユーザのランクに応じて送料を計算するコード
 interface User {
   getShippingFee: (baseShippingFee: number) => number;
 }
@@ -28,8 +16,15 @@ class VipUser implements User {
   getShippingFee = (baseShippingFee: number) => baseShippingFee * 0.5;
 }
 
-(function main() {
+class calculateFeeServiceCorrenct {
+  private BASE_SHIPPING_FEE = 100;
+  calculateFee(user: User, accountingFee: number): number {
+    const shippingFee = user.getShippingFee(this.BASE_SHIPPING_FEE);
+    return shippingFee + accountingFee;
+  }
+}
 
+function main() {
   const accountingFee = 500;
   const service = new calculateFeeServiceCorrenct();
 
@@ -44,6 +39,8 @@ class VipUser implements User {
   console.log(`通常ユーザの料金: ${normalUserFee}`);
   console.log(`会員ユーザの料金: ${memberUserFee}`);
   console.log(`特別ユーザの料金: ${vipUserFee}`);
-})();
+};
+
+main()
 
 

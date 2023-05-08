@@ -2,28 +2,23 @@
 interface Purchase {
   userId: string
   productId: string
-  transaction: {
-    // succeededがtrueなら購入不可ということなら、そのロジックは別に用意されているはず
-    succeeded: true
-    completedAt: Date
-  }
 }
 
 interface PaymentRecordRepo {
-  getPurchasesBy: (userId: string) => Purchase[];
-  // getPurchasesByの取得結果に対してuserIdとproductIdで絞理、そのtransaction.succeededを返す
-  isUserCanPurchase: (userId: string, productId: string) => boolean;
+  getPurchasesByUserIdAfterDate: (userId: string, date: Date) => Purchase[]
 }
 
 class PurchaseService {
-  public constructor(private paymentRecordRepo: PaymentRecordRepo) {}
+  public constructor(
+    private paymentRecordRepo: PaymentRecordRepo,
+    private purchaseValidator: PurchaseValidator
+  ) {}
 
   public purchase(userId: string, productId: string) {
-    const canPurchase = this.paymentRecordRepo.isUserCanPurchase(userId, productId);
-    if (!canPurchase) {
-      throw new Error('この商品はおひとりさま一品限定です！')
+    const result = this.purchaseValidator.validate(userId, productId)
+    if (!result.isPurchasable) {
+      throw new Error(`Error: ${result.message}`)
     }
-
     // 購入手続きに進む
   }
 }
